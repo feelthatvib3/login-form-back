@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/app.ts",
-    "prisma:generate": "prisma generate --no-engine",
+    "prisma:generate": "prisma generate",
     "build": "tsc && resolve-tspaths",
     "start": "npm run prisma:generate && node dist/app.js"
   },
