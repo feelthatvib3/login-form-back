@@ -17,7 +17,13 @@ app.use(
     credentials: true
   })
 );
-app.options('*', cors());
+app.options(
+  '*',
+  cors({
+    origin: 'https://login.feelthatvib3.rocks',
+    credentials: true
+  })
+);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
