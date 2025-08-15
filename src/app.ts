@@ -11,6 +11,13 @@ import { env } from 'config/env';
 const app = express();
 const PORT = env.PORT;
 
+app.use(
+  cors({
+    origin: 'https://login.feelthatvib3.rocks',
+    credentials: true
+  })
+);
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
