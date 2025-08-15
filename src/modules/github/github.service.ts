@@ -57,13 +57,27 @@ export class GithubService {
         headers: { Authorization: `token ${accessToken}` }
       });
       const emails = (await emailsRes.json()) as GithubEmail[];
-      email = emails.find((e) => e.primary)?.email || null;
+      email = emails.find((e) => e.primary && e.verified)?.email || null;
     }
 
+    if (!email) throw new Error('GitHub email not available');
+
+    // Сначала ищем пользователя по email
     let user = await prisma.user.findUnique({
-      where: { githubId: String(ghUser.id) }
+      where: { email }
     });
-    if (!user) {
+
+    if (user) {
+      // Если есть githubId, проверяем, совпадает ли
+      if (!user.githubId) {
+        // Привязываем githubId к существующему пользователю
+        user = await prisma.user.update({
+          where: { id: user.id },
+          data: { githubId: String(ghUser.id) }
+        });
+      }
+    } else {
+      // Создаём нового пользователя
       user = await prisma.user.create({
         data: {
           githubId: String(ghUser.id),

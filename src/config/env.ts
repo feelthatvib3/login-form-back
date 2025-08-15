@@ -8,7 +8,8 @@ export const envSchema = z.object({
   GITHUB_CLIENT_SECRET: z.string(),
   GITHUB_REDIRECT_URI: z.url(),
   PORT: z.string().regex(/^\d+$/, 'PORT must be a number').transform(Number).default(3000),
-  BACKEND_URL: z.url()
+  BACKEND_URL: z.url(),
+  FRONTEND_URL: z.url()
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
