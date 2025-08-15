@@ -62,22 +62,18 @@ export class GithubService {
 
     if (!email) throw new Error('GitHub email not available');
 
-    // Сначала ищем пользователя по email
     let user = await prisma.user.findUnique({
       where: { email }
     });
 
     if (user) {
-      // Если есть githubId, проверяем, совпадает ли
       if (!user.githubId) {
-        // Привязываем githubId к существующему пользователю
         user = await prisma.user.update({
           where: { id: user.id },
           data: { githubId: String(ghUser.id) }
         });
       }
     } else {
-      // Создаём нового пользователя
       user = await prisma.user.create({
         data: {
           githubId: String(ghUser.id),
