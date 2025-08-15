@@ -25,10 +25,6 @@ export class GithubController {
 
       res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        domain: '.feelthatvib3.rocks',
-        path: '/',
         maxAge: 1000 * 60 * 60 * 24
       });
 
