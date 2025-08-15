@@ -11,28 +11,15 @@ import { env } from 'config/env';
 const app = express();
 const PORT = env.PORT;
 
-app.use(
-  cors({
-    origin: 'https://login.feelthatvib3.rocks',
-    credentials: true
-  })
-);
-app.options(
-  '*',
-  cors({
-    origin: 'https://login.feelthatvib3.rocks',
-    credentials: true
-  })
-);
-app.use((req, res, next) => {
-  res.header('Vary', 'Origin');
-  next();
-});
+const corsOptions = {
+  origin: 'https://login.feelthatvib3.rocks',
+  credentials: true
+};
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/auth', authRouter);
-app.use('/auth/github', githubRoutes);
+app.use('/auth', cors(corsOptions), authRouter);
+app.use('/auth/github', cors(corsOptions), githubRoutes);
 
 app.listen(PORT);
