@@ -13,7 +13,7 @@ const PORT = env.PORT;
 
 app.use(
   cors({
-    origin: 'https://login.feelthatvib3.rocks/',
+    origin: 'https://login.feelthatvib3.rocks',
     credentials: true
   })
 );
