@@ -24,6 +24,10 @@ app.options(
     credentials: true
   })
 );
+app.use((req, res, next) => {
+  res.header('Vary', 'Origin');
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(cookieParser());
