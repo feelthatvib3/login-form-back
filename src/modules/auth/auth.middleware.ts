@@ -10,8 +10,6 @@ export interface AuthRequest extends Request {
 export function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
   const token = req.cookies.token;
   if (!token) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://login.feelthatvib3.rocks');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
     return res.status(401).json({ authenticated: false });
   }
 

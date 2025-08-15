@@ -23,6 +23,9 @@ export class AuthController {
         maxAge: 1000 * 60 * 60 * 24
       });
 
+      res.setHeader('Access-Control-Allow-Origin', 'https://login.feelthatvib3.rocks');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+
       res.json({ success: true });
     } catch (err: any) {
       res.status(400).json({ success: false, error: err.message });
@@ -40,6 +43,9 @@ export class AuthController {
         sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24
       });
+
+      res.setHeader('Access-Control-Allow-Origin', 'https://login.feelthatvib3.rocks');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
 
       res.json({ success: true });
     } catch (err: any) {

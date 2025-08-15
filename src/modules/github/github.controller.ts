@@ -27,6 +27,7 @@ export class GithubController {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
+        domain: '.feelthatvib3.rocks',
         maxAge: 1000 * 60 * 60 * 24
       });
 
