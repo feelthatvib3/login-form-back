@@ -85,7 +85,7 @@ export class GithubService {
       });
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ userId: user.id }, 'test', {
       expiresIn: '7d'
     });
 

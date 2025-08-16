@@ -30,7 +30,7 @@ export class AuthService {
       throw new Error('Incorrect credentials. Please try again.');
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '7d' });
+    const token = jwt.sign({ userId: user.id }, 'test', { expiresIn: '7d' });
     return { token };
   };
 }

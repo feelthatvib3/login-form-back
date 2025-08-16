@@ -17,7 +17,6 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
-    "tsconfig-paths": "^4.2.0",
     "zod": "^4.0.17"
   },
   "devDependencies": {
