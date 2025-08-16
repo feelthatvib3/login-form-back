@@ -15,7 +15,6 @@ export class GithubController {
   handleCallback = async (req: Request, res: Response): Promise<void> => {
     try {
       const { code } = req.query;
-
       if (!code || typeof code !== 'string') {
         res.status(400).json({ success: false, message: 'Authorization code is required' });
         return;
@@ -23,18 +22,12 @@ export class GithubController {
 
       const { token } = await this.githubService.handleCallback(code);
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-      });
-
-      const frontendUrl = env.FRONTEND_URL;
+      const frontendUrl = `${env.FRONTEND_URL}/auth/success?token=${token}`;
       res.redirect(frontendUrl);
     } catch (error) {
       console.error('GitHub auth error:', error);
-      const frontendUrl = env.FRONTEND_URL;
-      res.redirect(`${frontendUrl}/auth/error`);
+      const frontendUrl = `${env.FRONTEND_URL}/auth/error`;
+      res.redirect(frontendUrl);
     }
   };
 

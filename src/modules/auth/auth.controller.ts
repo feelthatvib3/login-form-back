@@ -11,18 +11,9 @@ export class AuthController {
   register = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body as RegisterDto;
-
-      const user = await this.authService.register(email, password);
-
       const { token } = await this.authService.login(email, password);
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-      });
-
-      res.json({ success: true });
+      res.json({ success: true, token });
     } catch (err: any) {
       res.status(400).json({ success: false, error: err.message });
     }
@@ -33,13 +24,7 @@ export class AuthController {
       const { email, password } = req.body as LoginDto;
       const { token } = await this.authService.login(email, password);
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-      });
-
-      res.json({ success: true });
+      res.json({ success: true, token });
     } catch (err: any) {
       res.status(401).json({ success: false, error: err.message });
     }
