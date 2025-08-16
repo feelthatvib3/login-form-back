@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
+import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import { prisma } from 'src/db';
-
-import { env } from 'config/env';
 
 export class AuthService {
   register = async (email: string, password: string, name?: string) => {
@@ -31,7 +30,7 @@ export class AuthService {
       throw new Error('Incorrect credentials. Please try again.');
     }
 
-    const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '7d' });
     return { token };
   };
 }

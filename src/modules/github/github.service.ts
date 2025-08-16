@@ -1,4 +1,5 @@
 import type { User } from '@prisma/client';
+import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import { prisma } from 'src/db';
@@ -84,7 +85,7 @@ export class GithubService {
       });
     }
 
-    const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '7d'
     });
 
