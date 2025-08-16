@@ -11,8 +11,8 @@ export class AuthController {
     try {
       const { email, password } = req.body as RegisterDto;
       const { token } = await this.authService.login(email, password);
-      console.log('register', email, password);
-      console.log('register', token);
+      console.error('register', email, password);
+      console.error('register', token);
       res.json({ success: true, token });
     } catch (err: any) {
       res.status(400).json({ success: false, error: err.message });
@@ -23,8 +23,8 @@ export class AuthController {
     try {
       const { email, password } = req.body as LoginDto;
       const { token } = await this.authService.login(email, password);
-      console.log('login', email, password);
-      console.log('login', token);
+      console.error('login', email, password);
+      console.error('login', token);
       res.json({ success: true, token: token });
     } catch (err: any) {
       res.status(401).json({ success: false, error: err.message });

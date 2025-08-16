@@ -23,7 +23,7 @@ export class GithubController {
       const { token } = await this.githubService.handleCallback(code);
 
       const frontendUrl = `${env.FRONTEND_URL}/auth/success?token=${token}`;
-      console.log('callback - github auth success', frontendUrl, token);
+      console.error('callback - github auth success', frontendUrl, token);
       res.redirect(frontendUrl);
     } catch (error) {
       console.error('GitHub auth error:', error);
@@ -45,7 +45,7 @@ export class GithubController {
 
       const { token, user } = await this.githubService.handleCallback(code);
 
-      console.log('callbackjson - github auth success', code, token, user);
+      console.error('callbackjson - github auth success', code, token, user);
 
       return res.json({
         success: true,
