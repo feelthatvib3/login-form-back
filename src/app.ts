@@ -11,6 +11,13 @@ import { env } from 'config/env';
 const app = express();
 const PORT = env.PORT;
 
+app.use(
+  cors({
+    origin: '*',
+    credentials: true
+  })
+);
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
